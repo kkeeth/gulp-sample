@@ -80,16 +80,10 @@ gulp.task('test', () => {
 
 // watch
 gulp.task('watch', () => {
-   gulp.watch(`${opts.path.js}/**/*.js`, ['js'])
-   gulp.watch(`${opts.path.style}/**/*.scss`, ['css'])
-   gulp.watch(`${opts.path.images}/**/*`, ['image'])
+   gulp.watch(`${opts.path.js}/**/*.js`, gulp.parallel('js'))
+   gulp.watch(`${opts.path.style}/**/*.scss`, gulp.parallel('css'))
+   gulp.watch(`${opts.path.images}/**/*`, gulp.parallel('image'))
 })
 
 // default
-gulp.task('default', () => {
-   return run_sequence(
-      'js',
-      'css',
-      'image'
-   )
-})
+gulp.task('default', gulp.parallel('watch'))
