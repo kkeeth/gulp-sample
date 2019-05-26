@@ -1,0 +1,30 @@
+{
+  "name": "gulp",
+  "description": "",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^7.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-eslint": "^4.0.2",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-plumber": "^1.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^4.0.1",
+    "gulp-uglify": "^3.0.0",
+    "imagemin-pngquant": "^7.0.0",
+    "run-sequence": "^2.2.1"
+  },
+  "scripts": {
+    "build": "gulp",
+    "build:js": "gulp js",
+    "build:css": "gulp css",
+    "build:image": "gulp image",
+    "dev": "gulp watch"
+  },
+  "author": "k-kuwahara",
+  "license": "MIT"
+}
