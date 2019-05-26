@@ -37,3 +37,7 @@ node_modules/
 
 # gulp build directory
 dist
+
+# mac original file
+
+.DS_Store
