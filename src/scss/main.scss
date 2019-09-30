@@ -1,0 +1,13 @@
+@import '_sub.scss';
+@import '_variables.scss';
+
+.notes {
+  color: $red;
+}
+
+#container {
+  background-color: $white;
+  .notesArea {
+    border: 1px solid $black;
+  }
+}

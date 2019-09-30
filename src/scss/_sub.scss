@@ -1,0 +1,11 @@
+@import '_variables.scss';
+
+.contents {
+  width: $default-width;
+  p {
+    margin: 0 0 1em;
+    em {
+      color: $red;
+    }
+  }
+}

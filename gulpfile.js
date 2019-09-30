@@ -1,6 +1,6 @@
 const gulp         = require('gulp'),
       sass         = require('gulp-sass'),
-      minifycss    = require('gulp-minify-css'),
+      minifycss    = require('gulp-clean-css'),
       uglify       = require('gulp-uglify'),
       babel        = require('gulp-babel'),
       eslint       = require('gulp-eslint'),
