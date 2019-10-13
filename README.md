@@ -2,6 +2,18 @@
 
 ## Usage
 
+* build
+
+```
+$ yarn build
+
+or
+
+$ npm run build
+```
+
+* develop(and watch)
+
 ```
 $ yarn dev
 
@@ -13,5 +25,9 @@ $ npm run dev
 ## test run
 
 ```
-$ npx gulp test
+$ yarn test
+
+or
+
+$ npm test
 ```
