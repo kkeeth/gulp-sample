@@ -1,4 +1,5 @@
-const gulp         = require('gulp'),
+const {src, dest, watch, series, parallel} = require('gulp'),
+      del          = require('del'),
       sass         = require('gulp-sass'),
       minifycss    = require('gulp-clean-css'),
       uglify       = require('gulp-uglify'),
@@ -25,21 +26,26 @@ const opts = {
    base_name: 'all'
 }
 
+// delete
+const clean = () => {
+   return del(opts.path.dist)
+}
+
 // sass
-gulp.task('css', () => {
-   return gulp.src(`${opts.path.style}/**/*.scss`)
+const compileSass = () => {
+   return src(`${opts.path.style}/**/*.scss`)
       .pipe(sass({
          outputStyle: 'expanded'
       })).on('error', sass.logError)
       .pipe(concat(`${opts.base_name}.css`))
       .pipe(minifycss())
       .pipe(rename({suffix: opts.min_suffix}))
-      .pipe(gulp.dest(opts.path.dist_css))
-})
+      .pipe(dest(opts.path.dist_css))
+}
 
 // js
-gulp.task('js', () => {
-   return gulp.src(`${opts.path.js}/**/*.js`)
+const compileJs = () => {
+   return src(`${opts.path.js}/**/*.js`)
       .pipe(plumber({
          errorHandler: (error) => {
             const task_name = 'build js'
@@ -56,12 +62,12 @@ gulp.task('js', () => {
       .pipe(concat(`${opts.base_name}.js`))
       .pipe(uglify())
       .pipe(rename({suffix: opts.min_suffix}))
-      .pipe(gulp.dest(opts.path.dist_js))
-})
+      .pipe(dest(opts.path.dist_js))
+}
 
 // images
-gulp.task('image', () => {
-   return gulp.src(`${opts.path.images}/**/*.(jpg|gif|png)`)
+const compileImage = () => {
+   return src(`${opts.path.images}/**/*.(jpg|gif|png)`)
       .pipe(imagemin({
          use: [
             pngquant({
@@ -70,20 +76,30 @@ gulp.task('image', () => {
             })
          ]
       }))
-      .pipe(gulp.dest(opts.path.dist_images))
-})
+      .pipe(dest(opts.path.dist_images))
+}
 
 // test run
-gulp.task('test', () => {
+const runTest = () => {
+   // TODO write test codes
    console.log('gulp run !!\n')
-})
+}
 
-// watch
-gulp.task('watch', () => {
-   gulp.watch(`${opts.path.js}/**/*.js`, gulp.parallel('js'))
-   gulp.watch(`${opts.path.style}/**/*.scss`, gulp.parallel('css'))
-   gulp.watch(`${opts.path.images}/**/*`, gulp.parallel('image'))
-})
+const watchFiles = () => {
+   watch(`${opts.path.js}/**/*.js`, compileJs),
+   watch(`${opts.path.style}/**/*.scss`, compileSass),
+   watch(`${opts.path.images}/**/*`, compileImage)
+}
+
+// build
+exports.build = series(
+   clean,
+   parallel(compileJs, compileSass, compileImage)
+)
 
 // default
-gulp.task('default', gulp.parallel('watch'))
+exports.default = series(
+   clean,
+   parallel(compileJs, compileSass, compileImage),
+   watchFiles
+)

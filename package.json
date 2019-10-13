@@ -5,6 +5,7 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
+    "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^7.0.1",
     "gulp-clean-css": "^4.2.0",
@@ -19,11 +20,8 @@
     "run-sequence": "^2.2.1"
   },
   "scripts": {
-    "build": "gulp",
-    "build:js": "gulp js",
-    "build:css": "gulp css",
-    "build:image": "gulp image",
-    "dev": "gulp watch"
+    "build": "gulp build",
+    "dev": "gulp"
   },
   "author": "k-kuwahara",
   "license": "MIT"
